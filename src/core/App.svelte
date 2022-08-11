@@ -1,33 +1,56 @@
 <script lang="ts">
-  export let name: string
+  import Button from '@smui/button'
+  import IconButton from '@smui/icon-button'
+  import TopAppBar, { Section, Title } from '@smui/top-app-bar'
+
+  import ListItem from './components/ListItem.svelte'
+
+  export let title: string
+
+  let items = [
+    {
+      name: 'Something',
+    },
+    {
+      name: 'Something else',
+    },
+  ]
+
+  const addItem = () => {
+    items = [...items, { name: 'New something' }]
+  }
 </script>
 
 <main>
-  <h1>Hello {name}!</h1>
-  <p>
-    Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-    how to build Svelte apps.
-  </p>
+  <TopAppBar variant="static">
+    <Section>
+      <IconButton class="material-icons">menu</IconButton>
+      <Title>Somethings</Title>
+    </Section>
+  </TopAppBar>
+
+  <div style="padding: 0 16px 16px 16px;">
+    <h1>Welcome to {title}!</h1>
+
+    <p>{items.length}</p>
+
+    <div>
+      <Button on:click={addItem}>New item</Button>
+    </div>
+  </div>
+
+  <div style="padding: 0 16px 16px 16px;">
+    {#each items as item, i}
+      <ListItem
+        title={item.name}
+        onClick={() => {
+          items = items.filter((v) => v != item)
+        }}
+      />
+      <br />
+    {/each}
+  </div>
 </main>
 
 <style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
 </style>
