@@ -1,9 +1,9 @@
 import { Model, Op } from 'sequelize'
 
 import { HttpException } from '../../exceptions/httpexception'
+import { ModelTypes } from '../../typescript'
 import { Models } from '../../services/sequelize'
 import { Router } from 'express'
-import { Models as _Models } from '../../typescript'
 import { matches } from '../../utils/validation'
 import { sha256 } from '../../utils/crypto'
 import { sign } from '../../middleware/jwt'
@@ -61,7 +61,7 @@ authRouter.post('/register', async (req, res, next) => {
   }
 
   try {
-    const user = await Models.User.create<Model<_Models.User, {}>>({
+    const user = await Models.User.create<Model<ModelTypes.User, {}>>({
       email: email,
       password: sha256(password),
       username: username,

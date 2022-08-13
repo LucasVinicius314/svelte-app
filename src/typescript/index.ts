@@ -1,7 +1,7 @@
 declare global {
   namespace Express {
     interface Request {
-      user: Models.User
+      user: ModelTypes.User
     }
   }
 
@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-export namespace Models {
+export namespace ModelTypes {
   export type User = {
     id: number
     email: string
@@ -25,10 +25,12 @@ export namespace Models {
     createdAt: Date
   }
 
-  export type Post = {
+  export type Todo = {
     id: number
     userId: number
+    completed: boolean
     content: string
+    title: string
     updatedAt: Date
     createdAt: Date
   }

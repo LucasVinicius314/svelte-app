@@ -1,16 +1,16 @@
 import { Model, col, fn, literal } from 'sequelize'
 
 import { HttpException } from '../../exceptions/httpexception'
+import { ModelTypes } from '../../typescript'
 import { Models } from '../../services/sequelize'
 import { Router } from 'express'
-import { Models as _Models } from '../../typescript'
 import { matches } from '../../utils/validation'
 
-export const postRouter = Router()
+export const todoRouter = Router()
 
-postRouter.post('/all', async (req, res, next) => {
+todoRouter.post('/all', async (req, res, next) => {
   try {
-    const posts = await Models.Post.findAll({
+    const todos = await Models.Todo.findAll({
       group: 'id',
       order: [['createdAt', 'DESC']],
       include: [
@@ -21,31 +21,25 @@ postRouter.post('/all', async (req, res, next) => {
           },
         },
       ],
-      attributes: {
-        include: [
-          [fn('COUNT', col('likes.id')), 'likeCount'],
-          [fn('COUNT', col('comments.id')), 'commentCount'],
-          [
-            literal(
-              `(select count(*) from likes lk where lk.postId = post.id and lk.userId = ${req.user.id})`
-            ),
-            'liked',
-          ],
-        ],
-      },
     })
 
-    res.json(posts)
+    res.json(todos)
   } catch (error) {
     next(new HttpException(400, 'Invalid data'))
   }
 })
 
-postRouter.post('/create', async (req, res, next) => {
+todoRouter.post('/create', async (req, res, next) => {
   const content = req.body.content
+  const title = req.body.title
 
   try {
     matches(content, 'string', 'Invalid content', {
+      minLength: 1,
+      maxLength: 200,
+    })
+
+    matches(title, 'string', 'Invalid content', {
       minLength: 1,
       maxLength: 200,
     })
@@ -62,13 +56,14 @@ postRouter.post('/create', async (req, res, next) => {
   }
 
   try {
-    await Models.Post.create<Model<_Models.Post, {}>>({
+    await Models.Todo.create<Model<ModelTypes.Todo, {}>>({
       content: content,
+
       userId: req.user.id,
     })
 
     res.json({
-      message: 'Post created',
+      message: 'Todo created',
     })
   } catch (error) {
     next(new HttpException(400, 'Invalid data'))
