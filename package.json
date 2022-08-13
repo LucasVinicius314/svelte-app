@@ -24,7 +24,7 @@
     "prettier": "^2.7.1"
   },
   "scripts": {
-    "start": "node .",
+    "start": "node build/index.js",
     "build": "tsc",
     "heroku-prebuild": "yarn install",
     "heroku-postbuild": "tsc"
