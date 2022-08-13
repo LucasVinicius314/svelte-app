@@ -4,15 +4,13 @@
   import TopAppBar, { Section, Title } from '@smui/top-app-bar'
 
   import { UserRepository } from '../repositories/userrepository'
-  import { userStore } from '../stores/user'
 
   const register = async () => {
-    const res = await UserRepository.login({
+    const res = await UserRepository.register({
       email: 'sure@gmail.com',
       passord: 'sure',
+      username: 'Sure',
     })
-
-    userStore.set(res)
   }
 </script>
 
@@ -20,11 +18,11 @@
   <TopAppBar variant="static">
     <Section>
       <IconButton class="material-icons">menu</IconButton>
-      <Title>Login</Title>
+      <Title>Register</Title>
     </Section>
   </TopAppBar>
 
-  <Button on:click={register}>Login</Button>
+  <Button on:click={register}>Register</Button>
 </section>
 
 <style>

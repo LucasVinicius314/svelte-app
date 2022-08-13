@@ -1,28 +1,31 @@
 <script lang="ts">
   import CircularProgress from '@smui/circular-progress'
-  import { onMount } from 'svelte'
-  import { userStore } from '../stores/user'
+  import Button from '@smui/button'
+  import { navigate } from 'svelte-routing'
 
-  onMount(() => {
-    userStore.set({
-      createdAt: new Date(),
-      email: 'a',
-      id: 0,
-      password: '',
-      updatedAt: new Date(),
-      username: '',
-    })
-  })
+  const login = () => {
+    navigate('/login')
+  }
+
+  const register = () => {
+    navigate('/register')
+  }
 </script>
 
-<div>
+<section>
   <CircularProgress style="height: 32px; width: 32px;" indeterminate />
-</div>
+
+  <div style="height: 32px;" />
+
+  <Button on:click={login}>Login</Button>
+  <Button on:click={register}>Register</Button>
+</section>
 
 <style>
   div {
     align-items: center;
     display: flex;
+    flex-direction: column;
     height: 100vh;
     justify-content: center;
   }
