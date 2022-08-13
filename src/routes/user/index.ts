@@ -1,5 +1,5 @@
+import { DBEntities } from '../../services/sequelize'
 import { HttpException } from '../../exceptions/httpexception'
-import { Models } from '../../services/sequelize'
 import { Router } from 'express'
 import { matches } from '../../utils/validation'
 import { sha256 } from '../../utils/crypto'
@@ -11,7 +11,7 @@ userRouter.post('/profile', async (req, res, next) => {
   const id = req.body.id
 
   try {
-    const user = await Models.User.findOne({
+    const user = await DBEntities.User.findOne({
       attributes: {
         exclude: ['password', 'email'],
       },
@@ -28,7 +28,7 @@ userRouter.post('/profile', async (req, res, next) => {
 
 userRouter.post('/validate', async (req, res, next) => {
   try {
-    const user = await Models.User.findOne({
+    const user = await DBEntities.User.findOne({
       attributes: {
         exclude: ['password'],
       },
@@ -55,7 +55,7 @@ userRouter.post('/update', async (req, res, next) => {
   const password = req.body.password
 
   try {
-    const user = await Models.User.findOne({
+    const user = await DBEntities.User.findOne({
       attributes: {
         exclude: ['password', 'email'],
       },

@@ -1,7 +1,9 @@
+import { UserCommonEntities } from './user'
+
 declare global {
   namespace Express {
     interface Request {
-      user: ModelTypes.User
+      user: UserCommonEntities.UserAttributes
     }
   }
 
@@ -12,26 +14,5 @@ declare global {
       DATABASE_URL: string
       SECRET: string
     }
-  }
-}
-
-export namespace ModelTypes {
-  export type User = {
-    id: number
-    email: string
-    password: string
-    username: string
-    updatedAt: Date
-    createdAt: Date
-  }
-
-  export type Todo = {
-    id: number
-    userId: number
-    completed: boolean
-    content: string
-    title: string
-    updatedAt: Date
-    createdAt: Date
   }
 }

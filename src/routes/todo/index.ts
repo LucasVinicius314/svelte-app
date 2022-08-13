@@ -1,8 +1,5 @@
-import { Model, col, fn, literal } from 'sequelize'
-
+import { DBEntities } from '../../services/sequelize'
 import { HttpException } from '../../exceptions/httpexception'
-import { ModelTypes } from '../../typescript'
-import { Models } from '../../services/sequelize'
 import { Router } from 'express'
 import { matches } from '../../utils/validation'
 
@@ -10,12 +7,12 @@ export const todoRouter = Router()
 
 todoRouter.post('/all', async (req, res, next) => {
   try {
-    const todos = await Models.Todo.findAll({
+    const todos = await DBEntities.Todo.findAll({
       group: 'id',
       order: [['createdAt', 'DESC']],
       include: [
         {
-          model: Models.User,
+          model: DBEntities.User,
           attributes: {
             exclude: ['password', 'email'],
           },
@@ -56,8 +53,10 @@ todoRouter.post('/create', async (req, res, next) => {
   }
 
   try {
-    await Models.Todo.create<Model<ModelTypes.Todo, {}>>({
+    await DBEntities.Todo.create({
+      completed: false,
       content: content,
+      title: title,
 
       userId: req.user.id,
     })

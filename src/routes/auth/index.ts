@@ -1,8 +1,6 @@
-import { Model, Op } from 'sequelize'
-
+import { DBEntities } from '../../services/sequelize'
 import { HttpException } from '../../exceptions/httpexception'
-import { ModelTypes } from '../../typescript'
-import { Models } from '../../services/sequelize'
+import { Op } from 'sequelize'
 import { Router } from 'express'
 import { matches } from '../../utils/validation'
 import { sha256 } from '../../utils/crypto'
@@ -15,7 +13,7 @@ authRouter.post('/login', async (req, res, next) => {
   const password = req.body.password
 
   try {
-    const user = await Models.User.findOne({
+    const user = await DBEntities.User.findOne({
       attributes: {
         exclude: ['password'],
       },
@@ -61,7 +59,7 @@ authRouter.post('/register', async (req, res, next) => {
   }
 
   try {
-    const user = await Models.User.create<Model<ModelTypes.User, {}>>({
+    const user = await DBEntities.User.create({
       email: email,
       password: sha256(password),
       username: username,
