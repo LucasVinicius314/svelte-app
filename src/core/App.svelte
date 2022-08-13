@@ -4,6 +4,7 @@
   import TopAppBar, { Section, Title } from '@smui/top-app-bar'
 
   import ListItem from './components/ListItem.svelte'
+  import Table from './components/Table.svelte'
 
   export let title: string
 
@@ -14,6 +15,9 @@
     {
       name: 'Something else',
     },
+    ...Array(100).fill({
+      name: 'Something else',
+    }),
   ]
 
   const addItem = () => {
@@ -29,8 +33,8 @@
     </Section>
   </TopAppBar>
 
-  <div style="padding: 0 16px 16px 16px;">
-    <h1>Welcome to {title}!</h1>
+  <div style="padding: 0 16px 0 16px;">
+    <h1 style="word-wrap: break-word;">Welcome to {title}!</h1>
 
     <p>{items.length}</p>
 
@@ -39,16 +43,36 @@
     </div>
   </div>
 
-  <div style="padding: 0 16px 16px 16px;">
+  <p style="padding: 0 16px; word-wrap: break-word;">
+    Check out your new stuff:
+  </p>
+
+  <div
+    style="background-color: white; margin: 0 16px 16px 16px; border-radius: 8px; align-items: stretch; overflow: hidden;"
+  >
     {#each items as item, i}
+      {#if i !== 0}
+        <hr />
+      {/if}
       <ListItem
         title={item.name}
         onClick={() => {
           items = items.filter((v) => v != item)
         }}
       />
-      <br />
     {/each}
+  </div>
+
+  <div style="padding: 0 16px 16px 16px;">
+    <Table />
+  </div>
+
+  <div style="padding: 0 16px 16px 16px;">
+    <Table />
+  </div>
+
+  <div style="padding: 0 16px 16px 16px;">
+    <Table />
   </div>
 </main>
 

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear",
+    "start": "sirv public --no-clear --host",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
@@ -16,6 +16,7 @@
     "@smui/common": "^6.0.0",
     "@smui/icon-button": "^6.0.0",
     "@smui/paper": "^6.0.0",
+    "@smui/tooltip": "^6.0.0",
     "@smui/top-app-bar": "^6.0.0",
     "@tsconfig/svelte": "^3.0.0",
     "rollup": "^2.3.4",
