@@ -26,6 +26,7 @@ authRouter.post('/login', async (req, res, next) => {
     })
 
     if (user) {
+      res.setHeader('Access-Control-Expose-Headers', '*')
       res.setHeader('authorization', sign(user.get()))
 
       res.json(user)
@@ -65,6 +66,7 @@ authRouter.post('/register', async (req, res, next) => {
       username: username,
     })
 
+    res.setHeader('Access-Control-Expose-Headers', '*')
     res.setHeader('authorization', sign(user.get()))
 
     res.json(user)

@@ -1,6 +1,5 @@
 <script lang="ts">
   import Button from '@smui/button'
-  import IconButton from '@smui/icon-button'
   import TopAppBar, { Section, Title } from '@smui/top-app-bar'
 
   import { UserRepository } from '../repositories/userrepository'
@@ -19,13 +18,20 @@
 <section>
   <TopAppBar variant="static">
     <Section>
-      <IconButton class="material-icons">menu</IconButton>
       <Title>Login</Title>
     </Section>
   </TopAppBar>
 
-  <Button on:click={register}>Login</Button>
+  <div>
+    <Button on:click={register}>Login</Button>
+  </div>
 </section>
 
 <style>
+  div {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
 </style>

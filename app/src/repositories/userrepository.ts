@@ -1,5 +1,6 @@
 import type { User } from '../typescript/user'
 import { api } from '../services/axios'
+import { setToken } from '../services/localstorage'
 
 export class UserRepository {
   static register = async ({
@@ -33,6 +34,14 @@ export class UserRepository {
       email: email,
       password: passord,
     })
+
+    const res = await req
+
+    return res.data
+  }
+
+  static validate = async () => {
+    const req = api.post<User>('/user/validate')
 
     const res = await req
 

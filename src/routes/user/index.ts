@@ -41,6 +41,7 @@ userRouter.post('/validate', async (req, res, next) => {
       throw 'User not found.'
     }
 
+    res.setHeader('Access-Control-Expose-Headers', '*')
     res.setHeader('authorization', sign(user.get()))
 
     res.json(user)

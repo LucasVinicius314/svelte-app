@@ -18,8 +18,18 @@
     </Section>
   </TopAppBar>
 
-  <Button on:click={logout}>Logout</Button>
+  <h1 style="padding: 0 16px;">Your todos</h1>
+
+  <div>
+    <Button on:click={logout}>Logout</Button>
+  </div>
 </section>
 
 <style>
+  div {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
 </style>
