@@ -27,6 +27,7 @@ const setup = async () => {
   app.use(json())
   app.use(urlencoded({ extended: true }))
   app.use('/api/', router)
+  app.use(express.static('app/public'))
 
   const server = http.createServer(app)
 
