@@ -27,8 +27,8 @@
   "scripts": {
     "start": "node build/index.js",
     "build": "tsc",
-    "heroku-prebuild": "yarn install",
-    "heroku-postbuild": "tsc"
+    "heroku-prebuild": "yarn install && cd app && yarn install",
+    "heroku-postbuild": "tsc && cd app && yarn build"
   },
   "engines": {
     "node": "16.16"
