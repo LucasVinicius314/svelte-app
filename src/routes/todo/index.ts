@@ -8,7 +8,6 @@ export const todoRouter = Router()
 todoRouter.post('/all', async (req, res, next) => {
   try {
     const todos = await DBEntities.Todo.findAll({
-      group: 'id',
       order: [['createdAt', 'DESC']],
       include: [
         {
@@ -22,6 +21,8 @@ todoRouter.post('/all', async (req, res, next) => {
 
     res.json(todos)
   } catch (error) {
+    console.log(error)
+
     next(new HttpException(400, 'Invalid data'))
   }
 })

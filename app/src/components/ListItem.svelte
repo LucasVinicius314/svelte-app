@@ -2,13 +2,15 @@
   import IconButton from '@smui/icon-button'
   import Tooltip, { Wrapper } from '@smui/tooltip'
 
-  export let title: string
+  import type { Todo } from '../typescript/todo'
+
+  export let todo: Todo
   export let onClick: () => void
 </script>
 
 <div style="display: flex;">
   <div style="flex: 1; padding: 16px;">
-    <span>{title}</span>
+    <span>{todo.title}</span>
   </div>
 
   <div class="spacer" />

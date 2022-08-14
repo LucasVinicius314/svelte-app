@@ -19,9 +19,9 @@ api.interceptors.request.use((reqConfig) => {
 })
 
 api.interceptors.response.use((resConfig) => {
-  const token = resConfig.headers['authorization'] as string | null
+  const token = resConfig.headers['authorization'] as string | undefined
 
-  if (token !== null) {
+  if (token !== undefined) {
     setToken(token)
   }
 

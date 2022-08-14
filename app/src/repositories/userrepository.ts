@@ -1,6 +1,5 @@
 import type { User } from '../typescript/user'
 import { api } from '../services/axios'
-import { setToken } from '../services/localstorage'
 
 export class UserRepository {
   static register = async ({
