@@ -1,6 +1,7 @@
 <script lang="ts">
   import IconButton from '@smui/icon-button'
   import Tooltip, { Wrapper } from '@smui/tooltip'
+  import { onMount } from 'svelte'
 
   import type { Todo } from '../typescript/todo'
 
@@ -9,8 +10,18 @@
 </script>
 
 <div style="display: flex;">
-  <div style="flex: 1; padding: 16px;">
+  <div style="display: flex; flex-direction: column; flex: 1; padding: 16px;">
     <span>{todo.title}</span>
+
+    <div style="height: 8px;" />
+
+    <small>{todo.content}</small>
+
+    <div style="height: 8px;" />
+
+    <small style="font-size: 10px; color: #555;">
+      Created: {new Date(todo.createdAt).toDateString()}
+    </small>
   </div>
 
   <div class="spacer" />
@@ -19,7 +30,7 @@
     <Wrapper>
       <IconButton class="material-icons" on:click={onClick}>close</IconButton>
 
-      <Tooltip>Close</Tooltip>
+      <Tooltip>Remove</Tooltip>
     </Wrapper>
   </div>
 </div>

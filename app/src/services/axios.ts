@@ -25,5 +25,7 @@ api.interceptors.response.use((resConfig) => {
     setToken(token)
   }
 
+  console.log(resConfig.data)
+
   return resConfig
 })

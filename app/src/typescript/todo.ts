@@ -6,6 +6,6 @@ export type Todo = {
   userId: number
 
   id: number
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
 }

@@ -10,8 +10,25 @@ export class TodoRepository {
     return res.data
   }
 
-  static create = async () => {
-    const req = api.post('/todo/create')
+  static create = async ({
+    content,
+    title,
+  }: {
+    content: string
+    title: string
+  }) => {
+    const req = api.post('/todo/create', {
+      content: content,
+      title: title,
+    })
+
+    await req
+  }
+
+  static delete = async ({ id }: { id: number }) => {
+    const req = api.post('/todo/delete', {
+      id: id,
+    })
 
     await req
   }

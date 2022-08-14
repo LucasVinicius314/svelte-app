@@ -27,6 +27,7 @@ export const matches: Matches = (value, type, message, options) => {
       if ((value as string).length > options.maxLength) {
         throw message
       }
+    } else if (type === 'number') {
     } else {
       throw message
     }

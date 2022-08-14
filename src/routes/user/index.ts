@@ -22,6 +22,8 @@ userRouter.post('/profile', async (req, res, next) => {
 
     res.json(user)
   } catch (error) {
+    console.log(error)
+
     next(new HttpException(400, 'Invalid data'))
   }
 })
@@ -46,6 +48,8 @@ userRouter.post('/validate', async (req, res, next) => {
 
     res.json(user)
   } catch (error) {
+    console.log(error)
+
     next(new HttpException(400, 'Invalid data'))
   }
 })
@@ -88,6 +92,8 @@ userRouter.post('/update', async (req, res, next) => {
 
     res.json(user)
   } catch (error) {
+    console.log(error)
+
     next(new HttpException(400, 'Invalid data'))
   }
 })

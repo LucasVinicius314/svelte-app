@@ -34,6 +34,8 @@ authRouter.post('/login', async (req, res, next) => {
       next(new HttpException(400, 'User not found'))
     }
   } catch (error) {
+    console.log(error)
+
     next(new HttpException(400, 'Invalid login data'))
   }
 })
@@ -48,6 +50,8 @@ authRouter.post('/register', async (req, res, next) => {
     matches(email, 'string', 'Invalid email')
     matches(password, 'string', 'Invalid password')
   } catch (error) {
+    console.log(error)
+
     let message = 'unknown'
 
     if (error instanceof Error) {
@@ -72,6 +76,7 @@ authRouter.post('/register', async (req, res, next) => {
     res.json(user)
   } catch (error) {
     console.log(error)
+
     next(new HttpException(400, 'Invalid data'))
   }
 })

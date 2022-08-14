@@ -42,6 +42,8 @@ todoRouter.post('/create', async (req, res, next) => {
       maxLength: 200,
     })
   } catch (error) {
+    console.log(error)
+
     let message = 'unknown'
 
     if (error instanceof Error) {
@@ -66,6 +68,41 @@ todoRouter.post('/create', async (req, res, next) => {
       message: 'Todo created',
     })
   } catch (error) {
+    console.log(error)
+
+    next(new HttpException(400, 'Invalid data'))
+  }
+})
+
+todoRouter.post('/delete', async (req, res, next) => {
+  const id = req.body.id
+  const userId = req.user.id
+
+  try {
+    matches(id, 'number', 'Invalid id')
+  } catch (error) {
+    console.log(error)
+
+    let message = 'unknown'
+
+    if (error instanceof Error) {
+      message = error.message
+    } else if (typeof error === 'string') {
+      message = error
+    }
+
+    return void next(new HttpException(400, message))
+  }
+
+  try {
+    await DBEntities.Todo.destroy({ where: { id, userId } })
+
+    res.json({
+      message: 'Todo deleted',
+    })
+  } catch (error) {
+    console.log(error)
+
     next(new HttpException(400, 'Invalid data'))
   }
 })
